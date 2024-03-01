@@ -21,7 +21,7 @@ public class PlayerList {
         if (!PlayerList.enabled) return;
         InGameHudAccessor inGameHud = (InGameHudAccessor) MinecraftAccessor.getInstance().inGameHud;
         if (MinecraftAccessor.getInstance().isWorldRemote() && inGameHud.getTicks() > lastSend+50) {
-            MinecraftAccessor.getInstance().player.sendChatMessage("/test");
+            MinecraftAccessor.getInstance().player.sendChatMessage("/list");
             lastSend = inGameHud.getTicks();
             commandSent = true;
         }
