@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class GameOptionsMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/client/Minecraft;Ljava/io/File;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;load()V"))
     public void PlayerList$init(Minecraft file, File par2, CallbackInfo ci) {
-        List<KeyBinding> bruh = new ArrayList<>(List.of(allKeys));
+        List<KeyBinding> bruh = new ArrayList<>(Arrays.asList(allKeys));
         bruh.add(PlayerListMod.PLAYER_LIST_KEY);
         allKeys = bruh.toArray(allKeys);
     }
