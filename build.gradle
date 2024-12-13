@@ -98,10 +98,6 @@ dependencies {
         transitive false
     }
 
-    modImplementation("net.danygames2014:spawneggs:${project.spawneggs_version}") {
-        transitive false
-    }
-
     modRuntimeOnly ("com.github.matthewperiut:stapi-fast-intro:17a7ed0") {
         transitive false
     }
