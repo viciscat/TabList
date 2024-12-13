@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Player List",
-  "description": "A client-side mod that adds a player list. Only works if the server has the plugin Essentials or RetroCommands.\nDo you know of a plugin that adds a player list command? Lemme know and I might add it.",
+  "description": "A client-side mod that adds a player list. Only works if the server has the plugin Essentials or the mod RetroCommands. Do you know of a plugin that adds a player list command? Lemme know and I might add it.",
   "authors": [
     "Vicisacat",
     "Telvarost"
