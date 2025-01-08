@@ -1,7 +1,7 @@
 package io.github.viciscat.playerlist.mixin;
 
 import io.github.viciscat.playerlist.PlayerList;
-import net.minecraft.class_564;
+import net.minecraft.client.util.ScreenScaler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -30,6 +30,10 @@ public class InGameHudMixin extends DrawContext {
 
     @Inject(method = "render", at=@At("TAIL"))
     public void PlayerList$render(float bl, boolean fuckof, int j, int par4, CallbackInfo ci) {
+        if (!PlayerList.isTabPressed() || !PlayerList.enabled) {
+            return;
+        }
+
         TextRenderer textRenderer = this.minecraft.textRenderer;
         if (ticks == PlayerList.readChatTick+1) {
             maxWidth = 0;
@@ -41,11 +45,10 @@ public class InGameHudMixin extends DrawContext {
             }
             PlayerList.commandSent = false;
         }
-        if (!PlayerList.isTabPressed() || !PlayerList.enabled) return;
 
-        class_564 widthHeightProvider = new class_564(this.minecraft.options, this.minecraft.displayWidth, this.minecraft.displayHeight);
-        int width = widthHeightProvider.method_1857();
-        int height = widthHeightProvider.method_1858();
+        ScreenScaler widthHeightProvider = new ScreenScaler(this.minecraft.options, this.minecraft.displayWidth, this.minecraft.displayHeight);
+        int width = widthHeightProvider.getScaledWidth();
+        int height = widthHeightProvider.getScaledHeight();
 
         final int maxPlayerPerColumn = 20;
 

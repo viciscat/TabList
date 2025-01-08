@@ -4,9 +4,10 @@
   "version": "${version}",
 
   "name": "Player List",
-  "description": "A client-side mod that adds a player list. Only works if the server has the plugin Essentials.\nDo you know of a plugin that adds a player list command? Lemme know and I might add it.",
+  "description": "A client-side mod that adds a player list. Only works if the server has the plugin Essentials or the mod RetroCommands. Do you know of a plugin that adds a player list command? Lemme know and I might add it.",
   "authors": [
-    "Me!"
+    "Vicisacat",
+    "Telvarost"
   ],
   "contact": {
     "homepage": "https://viciscat.github.io",
@@ -14,26 +15,28 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/playerlist/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.viciscat.playerlist.PlayerListMod"
-    ],
-    "main": [
       "io.github.viciscat.playerlist.PlayerListMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "playerlist.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.13.3",
     "minecraft": "1.0.0-beta.7.3"
   },
+
   "suggests": {
-    "another-mod": "*"
+    "modmenu": "*"
+  },
+
+  "custom": {
+    "modmenu:clientsideOnly": true
   }
 }
