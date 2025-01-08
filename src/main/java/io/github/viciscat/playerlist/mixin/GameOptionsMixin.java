@@ -21,9 +21,9 @@ public class GameOptionsMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/client/Minecraft;Ljava/io/File;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;load()V"))
     public void PlayerList$init(Minecraft file, File par2, CallbackInfo ci) {
-        List<KeyBinding> bruh = new ArrayList<>(List.of(allKeys));
-        bruh.add(PlayerListMod.PLAYER_LIST_KEY);
-        allKeys = bruh.toArray(allKeys);
+        List<KeyBinding> currentKeys = new ArrayList<>(List.of(allKeys));
+        currentKeys.add(PlayerListMod.PLAYER_LIST_KEY);
+        allKeys = currentKeys.toArray(allKeys);
     }
 
     @Inject(method = "getKeybindName", at = @At("HEAD"), cancellable = true)

@@ -18,11 +18,11 @@ import java.awt.*;
 @Mixin(InGameHud.class)
 public class InGameHudMixin extends DrawContext {
     @Unique
-    private static final Color textColor = new Color(255, 255, 255);
+    private static final Color TEXT_COLOR = new Color(255, 255, 255);
     @Unique
-    private static final Color columnColor = new Color(255, 255, 255, 50);
+    private static final Color COLUMN_COLOR = new Color(255, 255, 255, 50);
     @Unique
-    private static final Color tabColor = new Color(0, 0, 0, 100);
+    private static final Color TAB_COLOR = new Color(0, 0, 0, 100);
     @Shadow private Minecraft minecraft;
 
     @Shadow private int ticks;
@@ -57,14 +57,14 @@ public class InGameHudMixin extends DrawContext {
         int tabWidth = columnWidth *columnCount + 10 *(columnCount+1);
         int tabHeight = maxPlayerPerColumn*9+2+20;
         int left = (width - tabWidth) / 2;
-        this.fill(left, 10, tabWidth+left, tabHeight + 10, tabColor.getRGB());
+        this.fill(left, 10, tabWidth+left, tabHeight + 10, TAB_COLOR.getRGB());
         for (int i = 0; i < columnCount; i++) {
             int columnLeft = left + 10 + (columnWidth+10)*i;
-            this.fill(columnLeft, 20, columnLeft + columnWidth, tabHeight, columnColor.getRGB());
+            this.fill(columnLeft, 20, columnLeft + columnWidth, tabHeight, COLUMN_COLOR.getRGB());
         }
         for (int i = 0; i < PlayerList.players.size(); i++) {
             int columnLeft = left + 10 + (columnWidth+10)*(i/maxPlayerPerColumn);
-            textRenderer.drawWithShadow(PlayerList.players.get(i), columnLeft+1, 21+(i%maxPlayerPerColumn)*9, textColor.getRGB());
+            textRenderer.drawWithShadow(PlayerList.players.get(i), columnLeft+1, 21+(i%maxPlayerPerColumn)*9, TEXT_COLOR.getRGB());
         }
 
     }

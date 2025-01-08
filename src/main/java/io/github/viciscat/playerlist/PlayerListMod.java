@@ -20,7 +20,7 @@ public class PlayerListMod implements ClientModInitializer, ModInitializer {
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
 
-        LOGGER.info("Hello client!");
+        LOGGER.info("Player list mod initialized");
     }
 
     @Override

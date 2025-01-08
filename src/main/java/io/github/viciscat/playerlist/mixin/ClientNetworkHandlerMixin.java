@@ -17,9 +17,9 @@ public class ClientNetworkHandlerMixin {
 
     @Shadow private Minecraft minecraft;
     @Unique
-    private static final String prefix = "Connected players:";
+    private static final String PREFIX = "Connected players:";
     @Unique
-    private static final String prefix2 = "§7Connected players:";
+    private static final String PREFIX_2 = "§7Connected players:";
 
     @Inject(method = "onChatMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;addChatMessage(Ljava/lang/String;)V"), cancellable = true)
     public void onChatMessage(ChatMessagePacket par1, CallbackInfo ci) {
@@ -38,17 +38,17 @@ public class ClientNetworkHandlerMixin {
             ci.cancel();
         }
 
-        if (par1.chatMessage.startsWith(prefix)) {
+        if (par1.chatMessage.startsWith(PREFIX)) {
             PlayerList.readChatTick = inGameHud.getTicks();
             PlayerList.playerListString = "";
-            PlayerList.playerListString += par1.chatMessage.replace(prefix, "");
+            PlayerList.playerListString += par1.chatMessage.replace(PREFIX, "");
             if (PlayerList.commandSent) {
                 ci.cancel();
             }
-        } else if (par1.chatMessage.startsWith(prefix2)) {
+        } else if (par1.chatMessage.startsWith(PREFIX_2)) {
             PlayerList.readChatTick = inGameHud.getTicks();
             PlayerList.playerListString = "";
-            PlayerList.playerListString += par1.chatMessage.replace(prefix2, "");
+            PlayerList.playerListString += par1.chatMessage.replace(PREFIX_2, "");
             if (PlayerList.commandSent) {
                 ci.cancel();
             }
