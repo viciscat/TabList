@@ -20,6 +20,8 @@ public class ClientNetworkHandlerMixin {
     private static final String PREFIX = "Connected players:";
     @Unique
     private static final String PREFIX_2 = "§7Connected players:";
+    @Unique
+    private boolean isRetroMC = false;
 
     @Inject(method = "onChatMessage", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;addChatMessage(Ljava/lang/String;)V"), cancellable = true)
     public void onChatMessage(ChatMessagePacket par1, CallbackInfo ci) {
@@ -52,11 +54,25 @@ public class ClientNetworkHandlerMixin {
             if (PlayerList.commandSent) {
                 ci.cancel();
             }
-        } else if (PlayerList.readChatTick == inGameHud.getTicks()) {
+        } else if (par1.chatMessage.startsWith("§7- ")) {
+            if (!isRetroMC) {
+                PlayerList.readChatTick = inGameHud.getTicks();
+                isRetroMC = true;
+                PlayerList.playerListString = "";
+            }
+            PlayerList.playerListString += par1.chatMessage.split(" ", 2)[1] + ",";
+            System.out.println(PlayerList.playerListString);
+            if (PlayerList.commandSent) {
+                ci.cancel();
+            }
+        } else if (PlayerList.readChatTick == inGameHud.getTicks() && !isRetroMC) {
             PlayerList.playerListString += par1.chatMessage;
             if (PlayerList.commandSent) {
                 ci.cancel();
             }
+        } else if (isRetroMC) {
+            if (PlayerList.commandSent) ci.cancel();
+            isRetroMC = false;
         }
     }
 
